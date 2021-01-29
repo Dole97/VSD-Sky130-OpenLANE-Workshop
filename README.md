@@ -10,6 +10,24 @@ Installed and ran OpenLANE on Ubuntu OS. It is recommended to allocate 4GB RAM a
 
 
 # Day 1: Introduction to open-source EDA, OpenLANE and Sky130 PDK
+
+# Skywater PDK Files
+
+The Skywater PDK Files we are working on are described under $PDK_ROOT. There are 3 subdirectories required for workshop.
+
+1. Skywater-pdk – Contains all the foundry provided PDK related files
+2. Open_pdks – Contains scripts that are used to bridge the gap between closed-source and open-source PDK to EDA tool compatibility
+3. Sky130A – The open-source compatible PDK files
+
+# Launching OpenLANE
+
+Navigate to the folder where flow.tcl file is located by typing 'cd <path_to_flow.tcl>' in terminal.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%201/VSD%20LAB-launching%20openlane.PNG)
+
+Then type in the command './flow.tcl -interactive' to run openLANE flow interactively. Once the openLANE starts, type '% package require openlane 0.9' to import the necessary software dependencies required.
+
+
 # Day 2: Floorplan considerations and introduction to library cell
 # Day 3: Design and characterization of one library cell using Magic Layout tool and ngspice
 # Day 4: Pre-layout Timing Analysis and Clock Tree Synthesis
