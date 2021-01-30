@@ -33,6 +33,10 @@ The command 'prep -design <design_name>' prepares the file structure for our des
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%201/prep%20-design.PNG)
 
+The 'prep -design <design_name> -tag <tag_name>' command enables us to create a custom folder of given tag_name.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%202/prep%20design%20tag.PNG)
+
 # Running Synthesis
 
 The 'run_synthesis' command runs the synthesis of design in openlane.
@@ -49,6 +53,7 @@ The synthesis file picorv32a.synthesis.v (present in the designs/picorv32a/runs/
 
 
 # Day 2: Floorplan considerations and introduction to library cell
+
 # Day 3: Design and characterization of one library cell using Magic Layout tool and ngspice
 # Day 4: Pre-layout Timing Analysis and Clock Tree Synthesis
 # Day 5: Final steps for RTL2GDS 
