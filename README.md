@@ -19,7 +19,7 @@ ASIC (Application Specific Integrated Circuit) Design Flow is an iterative and d
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/asic%20design%20flow.PNG)
 
-Chip Specification - The VLSI engineers are provided with the specifications according to which they need to design circuits taht meets these constraints for their system.
+Chip Specification - The VLSI engineers are provided with the specifications according to which they need to design circuits that meet these constraints for their system.
 
 Design Entry/Functional Verification - In this stage the RTL design and Behavioral Modeling are performed using the Hardware Description Language (HDL).
 
