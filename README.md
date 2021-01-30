@@ -151,7 +151,9 @@ Take cursor on a particular part of the cell and press 's' to select that part. 
 In the tkcon terminal, enter the following 3 commands in order given below :
 
 % extract all
+
 % ext2spice cthresh 0 rthresh 0
+
 % ext2spice 
 
 To extract the parasitic spice file for the associated layout one needs to create an extraction file. After generating the extracted file we need to output the .ext file to a spice file.
