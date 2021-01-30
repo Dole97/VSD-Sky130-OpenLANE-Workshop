@@ -328,7 +328,7 @@ Magic allows users to generate cell LEF information directly from the Magic term
 
 Viewing the lef file:
 
-
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%204/view%20lef%20file.PNG)
 
 We see that setting a layer as port , it creates a PIN.
 
@@ -428,14 +428,23 @@ Timing analysis is done in OpenLANE by creating a .db database file. This databa
 Then type these command:
 
 % write_db pico_cts.db
+
 % read_db pico_cts.db
+
 % read_lef <Location_of_LEF_file> //Location of LEF file - /designs/picorv32a/runs/<tag_name>/tmp/merged.lef
+
 % read_def <Location_of_DEF_file> //Location of DEF file - /designs/picorv32a/runs/<tag_name>/results/cts/picorv23a.cts.def
+
 % read_verilog <Location_of_verilog_file> //Verilog file - /designs/picorv32a/runs/<tag_name>/results/synthesis/picorv32a.synthesis_cts.v
+
 % read_liberty $::env(LIB_SYNTH_COMPLETE)
+
 % link_design <design_name> //design name = picorv32a
+
 % read_sdc <Location_of_sdc_file> //sdc file - /designs/picorv32a/runs/<tag_name>/src/my_base.sdc
+
 % set_propagated_clock [all_clocks]
+
 % report_checks -path_delay min_max -fields {slew trans net cap inpput_pin} -format full_clock_expanded -digits 4 
 
 # Day 5: Final steps for RTL2GDS
@@ -484,7 +493,13 @@ $ python3 main.py /designs/picorv32a/runs/<tag_name>/tmp/merged.lef /designs/pic
 
 After the extraction is complete we open the /designs/picorv32a/runs/<tag_name>/results/routing and we will finf .spef file created there:
 
+# Acknowledgements
 
+Nickson Jose - VSD VLSI Engineer (https://github.com/nickson-jose/)
+
+Kunal Ghosh - Co-founder (VSD Corp. Pvt. Ltd) (https://github.com/kunalg123)
+
+Praharsha Mahurkar - Teaching Assistant at VSD (https://github.com/praharshapm)
 
 
 
