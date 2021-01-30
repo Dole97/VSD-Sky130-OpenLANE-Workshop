@@ -23,7 +23,7 @@ Chip Specification - The VLSI engineers are provided with the specifications acc
 
 Design Entry/Functional Verification - In this stage the RTL design and Behavioral Modeling are performed using the Hardware Description Language (HDL).
 
-RTL synthesis - In this stage the system taht was designed is implemented and represented and the netlists are tech-mapped to the specific logic gates.
+RTL synthesis - In this stage the system that was designed is implemented and represented and the netlists are tech-mapped to the specific logic gates.
 
 Partitioning of Chip - In this step demarcation of certain sections of the chip and designing each sub-section happens.
 
