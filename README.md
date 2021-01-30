@@ -13,7 +13,8 @@ Installed and ran OpenLANE on Ubuntu OS. It is recommended to allocate 4GB RAM a
 
 
 
-RTL to GDSII flow
+# RTL to GDSII flow
+
 ASIC (Application Specific Integrated Circuit) Design Flow is an iterative and dynamic process which follows various steps.. The flow has 11 different stages as shown below :-
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/asic%20design%20flow.PNG)
