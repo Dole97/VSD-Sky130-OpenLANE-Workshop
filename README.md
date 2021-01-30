@@ -495,11 +495,11 @@ After the extraction is complete we open the /designs/picorv32a/runs/<tag_name>/
 
 # Acknowledgements
 
-Nickson Jose - VSD VLSI Engineer (https://github.com/nickson-jose)
+[Nickson Jose - VSD VLSI Engineer](https://github.com/nickson-jose)
 
-Kunal Ghosh - Co-founder (VSD Corp. Pvt. Ltd) (https://github.com/kunalg123)
+[Kunal Ghosh - Co-founder, VSD Corp. Pvt. Ltd](https://github.com/kunalg123)
 
-Praharsha Mahurkar - Teaching Assistant at VSD (https://github.com/praharshapm)
+[Praharsha Mahurkar - Teaching Assistant at VSD](https://github.com/praharshapm)
 
 
 
