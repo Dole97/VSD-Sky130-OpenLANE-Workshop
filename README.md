@@ -53,7 +53,7 @@ The OpenLANE Flow is as follows:
 
 The various tools used by OpenLANE in ASIC Flow are :
 
-Synthesis
+# Synthesis
 
 yosys - Performs RTL synthesis
 
@@ -70,7 +70,7 @@ pdn - Generates the power distribution network
 
 tapcell - Inserts welltap and decap cells in the floorplan
 
-Placement
+# Placement
 
 RePLace - Performs global placement
 
@@ -80,11 +80,11 @@ OpenPhySyn - Performs timing optimizations on the design
 
 OpenDP - Performs detailed placement to legalize the globally placed components
 
-CTS
+# CTS
 
 TritonCTS - Synthesizes the clock distribution network (the clock tree)
 
-Routing *
+# Routing *
 
 FastRoute - Performs global routing to generate a guide file for the detailed router
 
@@ -92,7 +92,7 @@ TritonRoute - Performs detailed routing
 
 SPEF-Extractor - Performs SPEF extraction
 
-GDSII Generation
+# GDSII Generation
 
 Magic - Streams out the final GDSII layout file from the routed def
 
