@@ -102,5 +102,108 @@ This is the view of placement in magic tool.
 
 
 # Day 3: Design and characterization of one library cell using Magic Layout tool and ngspice
+
+# Magic tool file of CMOS inverter
+
+We worked on a simple CMOS inverter predesigned in magic. We worked on the .mag file for the inverter mentioned which was available in @nickson-jose's github repository titled "vsdstdcelldesign".
+
+In the openlane_working_dir/openLANE_flow directory, clone the said repository using the command:
+
+git clone https://github.com/nickson-jose/vsdstdcelldesign
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/cloning%20git%20repo.PNG)
+
+These are the files inside vsdstdcelldesign folder.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/files%20inside%20vsdstdcelldesign.PNG)
+
+We copy sky130A.tech file from pdks folder to vsdstdcelldesign folder by navigating to vsdstdcelldesign folder and typing the command : cp sky130A.tech /Desktop/work/tools/openlane_working_dir/openLANE_flow/vsdstdcelldesign
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/cmd%20to%20copy%20skytech130A%20file.PNG)
+
+Check whether the tech file is copied to vsdstdcelldesign folder
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/sky130A%20tech%20file%20saved%20to%20vsdstdcelldesign.PNG)
+
+# Viewing the cell in magic tool
+
+Then we open the cell design in magic tool by the following command : magic -T sky130A.tech sky130A_inv.mag &
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/cmd%20to%20open%20cell%20in%20magic%20tool.PNG)
+
+This is the view of our cell in magic tool.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/std%20cell%20layout%20in%20magic%20tool.PNG)
+
+# % what command 
+Take cursor on a particular part of the cell and press 's' to select that part. Then type '% what' and press enter in tkcon terminal of magic tool to obtain more information about that part.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/what%20cmd%20in%20tkcon.PNG)
+
+# Extracting parasatic spice file
+In the tkcon terminal, enter the following 3 commands in order given below :
+
+% extract all
+% ext2spice cthresh 0 rthresh 0
+% ext2spice 
+
+To extract the parasitic spice file for the associated layout one needs to create an extraction file. After generating the extracted file we need to output the .ext file to a spice file.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/ext2spice.PNG)
+
+In the directory vsdstdcelldesign, a '.spice' file will be created.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/sky130_inv.spice.PNG)
+
+# Configuring ngspice file
+
+Once we have the .spice file available in the directory, we can perform the necessary configurations and changes using an editor.
+
+There are some changes we need to make in the .spice file (sky130A_inv.spice) to prepare it for further stages of the OpenLANE flow. They are:
+
+include the pshort and nshort libraries - .include ./libs/phsort.lib & .include./libs/nshort.lib
+pshort & nshort are replaced with pshort_model.0 and nshort_model.0 respectively.
+We need to define some ports which we make use of in the design - VDD, VSS, Va.
+Va A GND PULSE(0V 3.3V 0 0.1ns 0.1ns 2ns 4ns) - This implies a source Va, between A and GND, whose waveform is defined as a PULSE function with min value = 0V and max value = 3.3V
+.tran 1n 20n - transient sweep from 1ns to 20 ns
+.option scale=0.01u
+These changes together should reflect in the spice file as follows:-
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/sky130%20inv%20spice%20file%20edit.PNG)
+
+# Command to plot waveform in ngspice
+
+Enter this command to view output vs time plot : % plot y vs time a
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/plot%20cmd%20in%20ngspice.PNG)
+
+The following plot is shown:
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/spice%20plot%20y%20vs%20a.PNG)
+
+# Characterization of the cell
+
+To characterize the cell, we have determined values of the following parameters:
+
+1. Rise Cell Delay - It is the propagation delay of signal when it propagates from input to output. It is calculated by taking difference of x - co-ordinates at (50% of peak magnitude of rising output waveform) - (50% of peak magnitude of falling input waveform).
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/rise%20delay.PNG)
+
+2. Fall Cell Delay - It is the propagation delay of signal when it propagates from input to output. It is calculated by taking difference of x - co-ordinates at (50% of peak magnitude of falling output waveform) - (50% of peak magnitude of rising input waveform).
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/fall%20delay.PNG)
+
+3. Rise Transition Delay - It is the time taken by the output signal to go from 20% to 80% of peak magnitude of rising waveform.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/rise%20transition%20delay.PNG)
+
+4. Fall Transition Delay - It is the time taken by the output signal to go from 80% to 20% of peak magnitude of falling waveform.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/fall%20transition%20delay.PNG)
+
+
+
+
+
 # Day 4: Pre-layout Timing Analysis and Clock Tree Synthesis
 # Day 5: Final steps for RTL2GDS 
