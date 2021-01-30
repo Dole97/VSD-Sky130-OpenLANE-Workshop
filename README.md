@@ -37,9 +37,18 @@ The 'prep -design <design_name> -tag <tag_name>' command enables us to create a 
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%202/prep%20design%20tag.PNG)
 
+'prep -design <design_name> -tag <tag_name> -overwrite' command can overwrite a parameter in design file.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%202/overwrite%20cmd.PNG)
+
+echo $env(CLOCK_PERIOD) command shows us the existing clock period of design. set $env(CLOCK_PERIOD) enables us to edit and change the existing value of clock period. You can overwrite value of clock period after running above command 'prep -design <design_name> -tag <tag_name> -overwrite'.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%202/change%20clock%20period.PNG)
+
+
 # Running Synthesis
 
-The 'run_synthesis' command runs the synthesis of design in openlane.
+The '% run_synthesis' command runs the synthesis of design in openlane.
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%201/run_synthesis.PNG)
 
@@ -52,7 +61,45 @@ The synthesis file picorv32a.synthesis.v (present in the designs/picorv32a/runs/
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%201/picorv32a%20synthesis%20.v%20file.PNG)
 
 
+
+
 # Day 2: Floorplan considerations and introduction to library cell
+
+# Run Floorplan
+
+After synthesis, the next step is to run the floorplan by entering the command '% run_floorplan'. 
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%202/run%20floorplan.PNG)
+
+This is the lef file of our design generated.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%202/picorv32a%20lef%20file.PNG)
+
+Syntax for viewing floorplan in magic : magic -T <magic tech file> lef read <lef file> def read <def file>
+  
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%202/cmd%20to%20open%20floorplan%20in%20magic.PNG)  
+
+We need Magic technology file i.e sky130A.tech, merged lef file and def file of floorplan to view floorplan in magic tool. 
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%202/floorplan%20view%20in%20magic.PNG)
+
+Press s followed by v to select and view the whole design.
+
+# Run Placement
+
+After floorplan, the next stage is placement. Run the placement by entering command '% run_placement'. Running placement is completed successfully.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%202/run%20placement%20complete.PNG)
+
+Syntax to open placement in magic tool : magic -T <magic tech file> lef read <lef file> def read <def file>
+  
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%202/cmd%20to%20open%20placement%20in%20magic%20tool.PNG)
+
+This is the view of placement in magic tool.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%202/placement%20view%20in%20magic.PNG)
+
+
 
 # Day 3: Design and characterization of one library cell using Magic Layout tool and ngspice
 # Day 4: Pre-layout Timing Analysis and Clock Tree Synthesis
