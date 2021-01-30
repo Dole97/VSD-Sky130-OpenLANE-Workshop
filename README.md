@@ -31,9 +31,13 @@ DFT Insertion - DFT (Design for test) Circuit is inserted.
 
 Floorplanning - Placing the core and die happens in this stage. Also Power Distribution Network is generated in this stage.
 
-Placement Stage - In the placement stage the positions of standard cells get fixed. Placement in OpneLANE happens in two stages: 1.Global Placement - Optimization is the main criteria here. Optimize by reducing wire length by reducing Half perimeter wire length(HPWL). It is not legal placement i.e standard cells in rows might overlap 2.Detailed Placement - Legalization is the main criteria here.
+Placement Stage - In the placement stage the positions of standard cells get fixed. Placement in OpenLANE happens in two stages:
 
-Clock Tree Synthesis - This stage works towards building a clock distribution network that whose role is to deliver the clock to all associated sequential elements prresent in the design.
+ 1.Global Placement - Optimization is the main criteria here. Optimize by reducing wire length by reducing Half perimeter wire length(HPWL). It is not legal placement i.e standard cells in rows might overlap
+
+ 2.Detailed Placement - Legalization is the main criteria here.
+
+Clock Tree Synthesis - This stage works towards building a clock distribution network that whose role is to deliver the clock to all associated sequential elements present in the design.
 
 Routing - This stage implements the interconnect system between standard cells in the design and minimizes DRC errors.
 
@@ -47,33 +51,58 @@ The OpenLANE Flow is as follows:
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/openlane%20flow.PNG)
 
-The various tools used by OpenLANE in ASIC Flo are :
+The various tools used by OpenLANE in ASIC Flow are :
 
 Synthesis
+
 yosys - Performs RTL synthesis
+
 abc - Performs technology mapping
+
 OpenSTA - Pefroms static timing analysis on the resulting netlist to generate timing reports
 Floorplan and PDN
+
 init_fp - Defines the core area for the macro as well as the rows (used for placement) and the tracks (used for routing)
+
 ioplacer - Places the macro input and output ports
+
 pdn - Generates the power distribution network
+
 tapcell - Inserts welltap and decap cells in the floorplan
+
 Placement
+
 RePLace - Performs global placement
+
 Resizer - Performs optional optimizations on the design
+
 OpenPhySyn - Performs timing optimizations on the design
-OpenDP - Perfroms detailed placement to legalize the globally placed components
+
+OpenDP - Performs detailed placement to legalize the globally placed components
+
 CTS
+
 TritonCTS - Synthesizes the clock distribution network (the clock tree)
+
 Routing *
+
 FastRoute - Performs global routing to generate a guide file for the detailed router
+
 TritonRoute - Performs detailed routing
+
 SPEF-Extractor - Performs SPEF extraction
+
 GDSII Generation
+
 Magic - Streams out the final GDSII layout file from the routed def
+
 Checks
+
 Magic - Performs DRC Checks & Antenna Checks
+
 Netgen - Performs LVS Checks
+
+
 # Day 1: Introduction to open-source EDA, OpenLANE and Sky130 PDK
 
 # Skywater PDK Files
