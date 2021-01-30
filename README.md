@@ -252,5 +252,165 @@ Magic allows users to generate cell LEF information directly from the Magic term
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%204/property%20lef%20file.PNG)
 
+Viewing the lef file:
 
-# Day 5: Final steps for RTL2GDS 
+
+
+We see that setting a layer as port , it creates a PIN.
+
+Copy lef file to picorv32a/src: 
+
+Copy the libraries to picorv32a/src:
+
+
+
+
+
+Including Custom Cells in OpenLANE
+Modify the picorv32a/src/config.tcl file as :
+
+
+
+prep design and this time if you are already using the older tag then use prep -degign <design_name> -tag <tag_name> -overwrite. -overwrite is significant as it overwrites the new changes made in the configuration files.
+
+After add these commands to include sky130_vsdinv.lef in ~/tmp/meged.lef in openlane flow:
+
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+
+Run synthesis:
+
+
+
+We see slack violations after synthesis:
+
+
+
+Viewing the Custom Inverter cell in Magic
+Run floorplan and placement. Invoke magic: 
+
+Our Standard Inverter cell is now integrated to the picorv22a layout:
+
+
+
+Type the command expand in tkcon window to view layout:
+
+
+
+Copy my_base.sdc to picorc32a/src:
+
+
+
+my_base.sdc file is as shown:
+
+
+
+Crate pre_sta.conf file and run sta pre_sta.conf in terminal.
+
+pre_sta.conf 
+
+running sta pre_sta.conf: 
+
+
+
+Fixing Slack Violations
+Here we change the synthesis strategy from 2 to 1. 
+
+Now to reduce the slack violation we will be upsizing the buffere with large delays. Note that we are doing this in terminal (with sta_ pre_conf.sta command) and not inside openlane.
+
+We will upsize cell 41881 which belongs to net 11341.
+
+
+
+Type command report_net -connection _11341_ to get details about the net.
+
+
+
+To upsize buffere 41881 from 1 to 4 use the command : replace_cell _41881_ sky130_fd_Sc_hd__buf4
+
+To check reports type the command : report_checks -fields {net cap slew input_pins} -digits 4
+
+
+
+Go on doing doing this with other bufferes to reduce the slack viloations in range (-1-0)(i.e expample 0.7).
+
+Improvements in slack violations: 
+
+Now use the command write_verilog <.v file_location> to update the verilog file after pre_sta reduction in slack violations.
+
+
+
+Note not to run synthesis again in openLANE flow and directly run floorplan after this.
+
+Clock Tree Synthesis
+To run Clock tree synthesis in OpenLANE flow us e the command -> % run_cts
+
+OpenLANE will add the necessary buffers required to make sure the timing rules are adhered and will modify our pre-existing netlist. A file named "picorv32a.synthesis_cts.v" will be created in the /designs/picorv32a/runs/<tag_name>/results/synthesis directory.
+
+OpenROAD
+Timing analysis is done in OpenLANE by creating a .db database file. This database file is created from the post-cts LEF and DEF files. To invoke OpenROAD use command -> % openroad.
+
+Then type these command:
+
+% write_db pico_cts.db
+% read_db pico_cts.db
+% read_lef <Location_of_LEF_file> //Location of LEF file - /designs/picorv32a/runs/<tag_name>/tmp/merged.lef
+% read_def <Location_of_DEF_file> //Location of DEF file - /designs/picorv32a/runs/<tag_name>/results/cts/picorv23a.cts.def
+% read_verilog <Location_of_verilog_file> //Verilog file - /designs/picorv32a/runs/<tag_name>/results/synthesis/picorv32a.synthesis_cts.v
+% read_liberty $::env(LIB_SYNTH_COMPLETE)
+% link_design <design_name> //design name = picorv32a
+% read_sdc <Location_of_sdc_file> //sdc file - /designs/picorv32a/runs/<tag_name>/src/my_base.sdc
+% set_propagated_clock [all_clocks]
+% report_checks -path_delay min_max -fields {slew trans net cap inpput_pin} -format full_clock_expanded -digits 4 
+
+# Day 5: Final steps for RTL2GDS
+
+Checking which part of flow we are in
+TO check which part of flow we currently are in use the command: % echo $::env(CURRENT_DEF)
+
+After the CTS when we use the command we see that CURRENT_DEF holds the def file that we get after performing the cts stage. 
+
+Power Distribution Network
+TO generate PDN us the command: gen_pdn
+
+
+
+This creates power ring for the entire core, power halo for any preplaced cells, power straps to bring power into the center of the chip and power rails for the standard cells.
+
+The distribution of power in the cell is as shown:
+
+
+
+After the PDN stage run % echo $::env(CURRENT_DEF) command again, and you will see that the current file is pdn.def
+
+
+
+Routing
+There are two types of routing : Global and Detailed routing. Global routing is done by FastRoute and Detailed routing is done by TritonRoute. TritonRoute offers us various routing strategis.ROUTING_STRATEGY from 0 to 3 uses Triton-13 engine which has faster runtime and ROUTING_STRATEGY 14 uses Triton-14 engine which has better DRCs. For checking which strategy we are using use the command :
+
+% echo $::env(ROUTING_STRATEGY)
+
+After this run routing by using the command : run_routing
+
+
+
+Routing completed:
+
+
+
+SPEF Extraction
+Once the routing is completed, the interconnect parasitics are extracted to perform sign off Post-STA analysis. These parasitics are extracted into a SPEF file.
+
+The SPEF EXTRACTOR is yet to be integrated to OpenLANE, we have to run it separately. Its available in /work/tools directory. We have to run the python file named main.py in SPEF_EXTRACTOR directory. The command to do this is as folows:
+
+$ python3 main.py /designs/picorv32a/runs/<tag_name>/tmp/merged.lef /designs/picorv32a/runs/<tag_name>/results/routing/picorv32a.def
+
+
+
+After the extraction is complete we open the /designs/picorv32a/runs/<tag_name>/results/routing and we will finf .spef file created there:
+
+
+
+
+
