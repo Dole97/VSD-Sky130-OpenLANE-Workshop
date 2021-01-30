@@ -1,6 +1,8 @@
 # VSD-Sky130-OpenLANE-Workshop
 Attended a 5-Day workshop on [Advanced Physical Design using OpenLANE/Sky130](https://www.vlsisystemdesign.com/advanced-physical-design-using-openlane-sky130/) conducted by [VLSI System Design](https://www.vlsisystemdesign.com/). The workshop introduced us to opensource EDA tools and PDKs and how are they used in the semiconductor industry. We performed the synthesis, floorplan, placement, clock tree synthesis and routing in openlane tool. We also designed and characterized a library cell in ngspice.
 
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/APD%20Openlane%20workshop.PNG)
+
 # Prerequisites
 Installed and ran OpenLANE on Ubuntu OS. It is recommended to allocate 4GB RAM and 40GB Disk Space to OS for smooth functioning. Windows user can use Oracle VM VirtualBox to run the OS. For further information about installation of OpenLANE and open-source EDA tools, refer to the following two videos on Udemy by VSD.
 
@@ -9,6 +11,67 @@ Installed and ran OpenLANE on Ubuntu OS. It is recommended to allocate 4GB RAM a
 [A complete to install open-source EDA tools](https://www.udemy.com/share/101skKAEESeVZUR3QF/)
 
 
+
+
+RTL to GDSII flow
+ASIC (Application Specific Integrated Circuit) Design Flow is an iterative and dynamic process which follows various steps.. The flow has 11 different stages as shown below :-
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/asic%20design%20flow.PNG)
+
+Chip Specification - The VLSI engineers are provided with the specifications according to which they need to design circuits taht meets these constraints for their system.
+
+Design Entry/Functional Verification - In this stage the RTL design and Behavioral Modeling are performed using the Hardware Description Language (HDL).
+
+RTL synthesis - In this stage the system taht was designed is implemented and represented and the netlists are tech-mapped to the specific logic gates.
+
+Partitioning of Chip - In this step demarcation of certain sections of the chip and designing each sub-section happens.
+
+DFT Insertion - DFT (Design for test) Circuit is inserted.
+
+Floorplanning - Placing the core and die happens in this stage. Also Power Distribution Network is generated in this stage.
+
+Placement Stage - In the placement stage the positions of standard cells get fixed. Placement in OpneLANE happens in two stages: 1.Global Placement - Optimization is the main criteria here. Optimize by reducing wire length by reducing Half perimeter wire length(HPWL). It is not legal placement i.e standard cells in rows might overlap 2.Detailed Placement - Legalization is the main criteria here.
+
+Clock Tree Synthesis - This stage works towards building a clock distribution network that whose role is to deliver the clock to all associated sequential elements prresent in the design.
+
+Routing - This stage implements the interconnect system between standard cells in the design and minimizes DRC errors.
+
+Final Verification - A final verification before sending the chip for fab is done here.
+
+GDSII - Graphic Design System(GDS) is a document that contains the layout design of the chip. It comes in the binary format, which is readable by specific EDA tools.This file is sent to fabs to get fabricated.
+
+The OpenLANE Flow
+The OpenLANE Flow is as follows:
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/openlane%20flow.PNG)
+
+The various tools used by OpenLANE in ASIC Flo are :
+
+Synthesis
+yosys - Performs RTL synthesis
+abc - Performs technology mapping
+OpenSTA - Pefroms static timing analysis on the resulting netlist to generate timing reports
+Floorplan and PDN
+init_fp - Defines the core area for the macro as well as the rows (used for placement) and the tracks (used for routing)
+ioplacer - Places the macro input and output ports
+pdn - Generates the power distribution network
+tapcell - Inserts welltap and decap cells in the floorplan
+Placement
+RePLace - Performs global placement
+Resizer - Performs optional optimizations on the design
+OpenPhySyn - Performs timing optimizations on the design
+OpenDP - Perfroms detailed placement to legalize the globally placed components
+CTS
+TritonCTS - Synthesizes the clock distribution network (the clock tree)
+Routing *
+FastRoute - Performs global routing to generate a guide file for the detailed router
+TritonRoute - Performs detailed routing
+SPEF-Extractor - Performs SPEF extraction
+GDSII Generation
+Magic - Streams out the final GDSII layout file from the routed def
+Checks
+Magic - Performs DRC Checks & Antenna Checks
+Netgen - Performs LVS Checks
 # Day 1: Introduction to open-source EDA, OpenLANE and Sky130 PDK
 
 # Skywater PDK Files
