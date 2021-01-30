@@ -60,6 +60,13 @@ The synthesis file picorv32a.synthesis.v (present in the designs/picorv32a/runs/
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%201/picorv32a%20synthesis%20.v%20file.PNG)
 
+yosys_2.stat.rpt folder, present in the designs/picorv32a/runs/<date_of_run>/results/synthesis, is the one we use for calculating buffer ratio, flop ratio etc.
+
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%201/VSD%20LAB-1%20Flop%20Ratio.PNG)
+
+Buffer Ratio = (sky130_fd_sc_hd__buf_1 + sky130_fd_sc_hd__buf_2)/(Number of Cells)= (2247+44)/17323 = 0.1322
+
+Flop Ratio =  (sky130_fd_sc_hd__dfxtp_4)/(Number of Cells) = 1634/17323 = 0.0943
 
 
 
@@ -185,19 +192,19 @@ The following plot is shown:
 
 To characterize the cell, we have determined values of the following parameters:
 
-1. Rise Cell Delay - It is the propagation delay of signal when it propagates from input to output. It is calculated by taking difference of x - co-ordinates at (50% of peak magnitude of rising output waveform) - (50% of peak magnitude of falling input waveform).
+1. Rise Cell Delay - It is the propagation delay of signal when it propagates from input to output. It is calculated by taking difference of x - co-ordinates at (50% of peak magnitude of rising output waveform) - (50% of peak magnitude of falling input waveform). Rise cell delay was found to be 0.3019 ns.
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/rise%20delay.PNG)
 
-2. Fall Cell Delay - It is the propagation delay of signal when it propagates from input to output. It is calculated by taking difference of x - co-ordinates at (50% of peak magnitude of falling output waveform) - (50% of peak magnitude of rising input waveform).
+2. Fall Cell Delay - It is the propagation delay of signal when it propagates from input to output. It is calculated by taking difference of x - co-ordinates at (50% of peak magnitude of falling output waveform) - (50% of peak magnitude of rising input waveform). Fall cell delay was found to be 0.1489 ns.
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/fall%20delay.PNG)
 
-3. Rise Transition Delay - It is the time taken by the output signal to go from 20% to 80% of peak magnitude of rising waveform.
+3. Rise Transition Delay - It is the time taken by the output signal to go from 20% to 80% of peak magnitude of rising waveform. In this case, the delay was 0.1282 ns.
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/rise%20transition%20delay.PNG)
 
-4. Fall Transition Delay - It is the time taken by the output signal to go from 80% to 20% of peak magnitude of falling waveform.
+4. Fall Transition Delay - It is the time taken by the output signal to go from 80% to 20% of peak magnitude of falling waveform. In this case, the delay was 0.0591 ns.
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/fall%20transition%20delay.PNG)
 
