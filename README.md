@@ -40,7 +40,8 @@ Final Verification - A final verification before sending the chip for fab is don
 
 GDSII - Graphic Design System(GDS) is a document that contains the layout design of the chip. It comes in the binary format, which is readable by specific EDA tools.This file is sent to fabs to get fabricated.
 
-The OpenLANE Flow
+# The OpenLANE Flow
+
 The OpenLANE Flow is as follows:
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/openlane%20flow.PNG)
