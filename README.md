@@ -117,7 +117,7 @@ These are the files inside vsdstdcelldesign folder.
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/files%20inside%20vsdstdcelldesign.PNG)
 
-We copy sky130A.tech file from pdks folder to vsdstdcelldesign folder by navigating to vsdstdcelldesign folder and typing the command : cp sky130A.tech /Desktop/work/tools/openlane_working_dir/openLANE_flow/vsdstdcelldesign
+We copy sky130A.tech file from pdks folder to vsdstdcelldesign folder by navigating to pdks folder (refer the following image) and typing the command : cp sky130A.tech /Desktop/work/tools/openlane_working_dir/openLANE_flow/vsdstdcelldesign
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%203/cmd%20to%20copy%20skytech130A%20file.PNG)
 
