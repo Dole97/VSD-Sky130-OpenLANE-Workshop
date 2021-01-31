@@ -355,6 +355,8 @@ Magic allows users to generate cell LEF information directly from the Magic term
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%204/property%20lef%20file.PNG)
 
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%204/lef%20file%20in%20vsdstdcelldesign%20folder.PNG)
+
 Viewing the lef file:
 
 ![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%204/view%20lef%20file.PNG)
@@ -365,22 +367,25 @@ Copy lef file to picorv32a/src:
 
 Copy the libraries to picorv32a/src:
 
-
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%204/picorv32a%20src%20file%20view.PNG)
 
 
 
 Including Custom Cells in OpenLANE
+
 Modify the picorv32a/src/config.tcl file as :
 
-
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%204/config.tcl%20in%20vsdstdcelldesign.PNG)
 
 prep design and this time if you are already using the older tag then use prep -degign <design_name> -tag <tag_name> -overwrite. -overwrite is significant as it overwrites the new changes made in the configuration files.
 
 After add these commands to include sky130_vsdinv.lef in ~/tmp/meged.lef in openlane flow:
 
 set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+
 add_lefs -src $lefs
 
+![alt text](https://github.com/Dole97/VSD-Sky130-OpenLANE-Workshop/blob/main/VSD%20Workshop/Day%204/add%20lef.PNG)
 
 Run synthesis:
 
