@@ -525,7 +525,7 @@ $ python3 main.py /designs/picorv32a/runs/<tag_name>/tmp/merged.lef /designs/pic
 
 
 
-After the extraction is complete we open the /designs/picorv32a/runs/<tag_name>/results/routing and we will finf .spef file created there:
+After the extraction is complete we open the /designs/picorv32a/runs/<tag_name>/results/routing and we will find .spef file created there:
 
 # Acknowledgements
 
